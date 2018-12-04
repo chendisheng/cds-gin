@@ -1,9 +1,11 @@
 package main
 
 import (
-	"cds-beego/util/config"
+	"cds-gin/controllers"
+	"cds-gin/util/config"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func main() {
@@ -11,12 +13,24 @@ func main() {
 	value1 := config.String("key1")
 	fmt.Println("key1 value =",value1)
 
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
+	router := gin.Default()
 
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
+
+	router.GET("/ping", func(c *gin.Context) {
+
+		c.JSON(http.StatusOK, "pong")
 	})
-	r.Run() // listen and serve on 0.0.0.0:8080
+
+	v1 := router.Group("/v1")
+	{
+		v1.POST("/ping", func(c *gin.Context) {
+			c.JSON(http.StatusOK, "pong")
+		})
+	}
+
+	//注册路由
+	controllers.RegProductRoute(router)
+
+	// listen and serve on 0.0.0.0:8080
+	router.Run()
 }
