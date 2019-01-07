@@ -2,7 +2,7 @@ package product_service
 
 import "cds-gin/models"
 
-type Product struct {
+type ProductService struct {
 	Id            int
 	Code         string
 	Price        float32
@@ -10,10 +10,11 @@ type Product struct {
 	PageSize int
 }
 
-func (* Product)AddProduct() (err error){
+func (s *ProductService)Add() (err error){
 
 	product := models.Product{
-
+		Code:s.Code,
+		Price:s.Price,
 	}
 
 	if err := models.AddProduct(product); err != nil {

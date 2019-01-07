@@ -1,5 +1,5 @@
-basePath: /v2
-host: petstore.swagger.io
+basePath: /demo
+host: localhost:8000
 info:
   contact:
     email: support@swagger.io
@@ -12,5 +12,26 @@ info:
   termsOfService: http://swagger.io/terms/
   title: Swagger Example API
   version: "1.0"
-paths: {}
+paths:
+  /api/v1/product:
+    post:
+      parameters:
+      - description: Code
+        in: query
+        name: code
+        required: true
+        type: string
+      - description: Price
+        in: query
+        name: price
+        required: true
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":200,"data":{},"msg":"ok"}'
+          schema:
+            type: string
+      summary: 新增产品
 swagger: "2.0"
