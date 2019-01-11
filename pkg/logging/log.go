@@ -1,8 +1,8 @@
 package logging
 
 import (
+	"cds-gin/pkg/file"
 	"fmt"
-	"github.com/EDDYCJY/go-gin-example/pkg/file"
 	"log"
 	"os"
 	"path/filepath"

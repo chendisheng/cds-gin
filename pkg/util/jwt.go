@@ -4,7 +4,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"time"
 
-	"github.com/EDDYCJY/go-gin-example/pkg/setting"
+	"cds-gin/pkg/setting"
 )
 
 var jwtSecret = []byte(setting.AppSetting.JwtSecret)

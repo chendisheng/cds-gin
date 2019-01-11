@@ -2,7 +2,6 @@ package v1
 
 import (
 	"cds-gin/pkg/app"
-	"cds-gin/pkg/e"
 	"cds-gin/services/product_service"
 
 	"github.com/gin-gonic/gin"
@@ -10,8 +9,8 @@ import (
 )
 
 type AddProductForm struct {
-	Code          string `form:"code" valid:"Required"`
-	Price         float32 `form:"price" valid:"Required"`
+	Code  string  `form:"code" valid:"Required"`
+	Price float32 `form:"price" valid:"Required"`
 }
 
 // @Summary 新增产品
@@ -28,15 +27,15 @@ func AddProduct(c *gin.Context) {
 
 	httpCode, errCode := app.BindAndValid(c, &form)
 	if errCode != http.StatusOK {
-		appG.Response(httpCode, errCode, nil)
+		appG.MsResponse(httpCode, app.FAIL, nil)
 		return
 	}
 
-	productService := product_service.ProductService{Code: form.Code,Price:form.Price}
+	productService := product_service.ProductService{Code: form.Code, Price: form.Price}
 	if err := productService.Add(); err != nil {
-		appG.Response(http.StatusInternalServerError, e.ERROR_ADD_PRODUCT_FAIL, nil)
+		appG.MsResponseOk(app.FAIL, nil)
 		return
 	}
 
-	appG.Response(http.StatusOK, e.SUCCESS, nil)
+	appG.MsResponseOk(app.SUCCESS, nil)
 }

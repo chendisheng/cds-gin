@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/EDDYCJY/go-gin-example/pkg/e"
+	"cds-gin/pkg/e"
 )
 
 func JWT() gin.HandlerFunc {
